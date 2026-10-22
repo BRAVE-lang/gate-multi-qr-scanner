@@ -1,11 +1,13 @@
 import React from 'react';
-import { QrCode, History, ShieldCheck } from 'lucide-react';
+import { QrCode, History, Download } from 'lucide-react';
 
 interface AppHeaderProps {
   status: 'idle' | 'ready' | 'scanning' | 'ocr';
   statusMessage?: string;
   onOpenHistory?: () => void;
   historyCount: number;
+  isInstallable?: boolean;
+  onInstallApp?: () => void;
 }
 
 export const AppHeader: React.FC<AppHeaderProps> = ({
@@ -13,6 +15,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   statusMessage,
   onOpenHistory,
   historyCount,
+  isInstallable = false,
+  onInstallApp,
 }) => {
   return (
     <header className="app-header">
@@ -30,6 +34,29 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          {isInstallable && onInstallApp && (
+            <button
+              type="button"
+              className="btn-secondary-tool"
+              onClick={onInstallApp}
+              id="btn-install-pwa"
+              aria-label="Install GATE Multi-QR Scanner as an application"
+              title="Install app to your home screen"
+              style={{
+                padding: '0.375rem 0.625rem',
+                borderRadius: 'var(--radius-full)',
+                background: 'var(--primary-light)',
+                borderColor: 'var(--primary-border)',
+                color: 'var(--primary)',
+                fontWeight: 700,
+                fontSize: '0.75rem',
+              }}
+            >
+              <Download size={14} />
+              <span>Install</span>
+            </button>
+          )}
+
           <div
             className={`status-badge ${status}`}
             role="status"

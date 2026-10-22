@@ -12,9 +12,11 @@ import { QRDetectorService } from './services/qrDetector';
 import { QuestionOCRService } from './services/questionOcr';
 import { matchQuestionsToQRCodes } from './services/questionMatcher';
 import { HistoryService } from './services/historyService';
+import { usePwaInstall } from './hooks/usePwaInstall';
 import { DecodedQRCode, PageSession } from './types';
 
 export const App: React.FC = () => {
+  const { isInstallable, installApp } = usePwaInstall();
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
   const [rotation, setRotation] = useState<number>(0);
@@ -293,6 +295,8 @@ export const App: React.FC = () => {
         statusMessage={statusMessage?.text}
         onOpenHistory={() => setShowHistory(true)}
         historyCount={sessions.length}
+        isInstallable={isInstallable}
+        onInstallApp={installApp}
       />
 
       <main className="main-content">

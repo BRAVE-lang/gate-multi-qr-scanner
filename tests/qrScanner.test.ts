@@ -433,4 +433,27 @@ describe('GATE Multi-QR Scanner Test Suite', () => {
 
     vi.unstubAllGlobals();
   });
+
+  // Test 16: PWA Manifest & Icons validation
+  it('validates web app manifest structure and required icons', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+
+    const manifestPath = path.resolve(__dirname, '../public/manifest.webmanifest');
+    expect(fs.existsSync(manifestPath)).toBe(true);
+
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+    expect(manifest.name).toBe('GATE Multi-QR Scanner');
+    expect(manifest.short_name).toBe('GATE QR');
+    expect(manifest.description).toBe('Scan multiple QR codes from a single image.');
+    expect(manifest.display).toBe('standalone');
+    expect(manifest.start_url).toBe('/');
+    expect(manifest.theme_color).toBe('#2563eb');
+    expect(manifest.background_color).toBe('#ffffff');
+
+    // Verify icons exist on disk
+    expect(fs.existsSync(path.resolve(__dirname, '../public/icons/icon-192.png'))).toBe(true);
+    expect(fs.existsSync(path.resolve(__dirname, '../public/icons/icon-512.png'))).toBe(true);
+    expect(fs.existsSync(path.resolve(__dirname, '../public/icons/icon-maskable-512.png'))).toBe(true);
+  });
 });

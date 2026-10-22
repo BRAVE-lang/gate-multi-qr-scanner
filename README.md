@@ -150,26 +150,23 @@ To install GATE Multi-QR Scanner as a standalone app on your Android phone:
 
 ## 🌐 Free HTTPS Deployment Guide
 
-You can deploy this application for free in less than 2 minutes using any of the following platforms:
+### Option A: Render (Static Site)
+Since your project is already connected to Render:
+1. In the Render Dashboard, ensure your service type is **Static Site**.
+2. Build Command: `npm run build`
+3. Publish Directory: `dist`
+4. Render automatically serves the site over HTTPS, enabling the Android PWA installation prompt and service worker caching immediately.
 
-### Option A: Vercel (Recommended)
+### Option B: Vercel
 1. Push your repository to GitHub.
 2. Go to [vercel.com](https://vercel.com) and sign in with GitHub.
 3. Click **"Add New Project"** and select `gate-multi-qr-scanner`.
 4. Framework Preset will automatically detect **Vite**.
-5. Click **"Deploy"**. Your app will be live on an HTTPS URL like `https://gate-multi-qr-scanner.vercel.app`!
+5. Click **"Deploy"**.
 
-### Option B: Netlify
-1. Run `npm run build` locally.
-2. Go to [app.netlify.com/drop](https://app.netlify.com/drop).
-3. Drag and drop the `dist/` folder into the Netlify drop zone.
-4. Netlify will immediately publish your site with a free HTTPS domain!
-
-### Option C: Cloudflare Pages
-1. Push your repository to GitHub.
-2. In Cloudflare Dashboard, go to **Workers & Pages** > **Create application** > **Pages**.
-3. Select your repository. Build command: `npm run build`, output directory: `dist`.
-4. Click **"Save and Deploy"**.
+### Option C: Netlify / Cloudflare Pages
+1. Build command: `npm run build`, output directory: `dist`.
+2. Serves with full HTTPS and automatic PWA support.
 
 ---
 
